@@ -2,1230 +2,1330 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Hypermart</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background: #f5f6fa;
-    overflow: hidden;
+html{
+    width:100%;
+    min-height:100%;
 }
 
-button {
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+body{
+    width:100%;
+    min-height:100%;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f4f6;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 
-#app {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
+button{
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
 }
 
-/* =========================
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+/* ==============================
+   APP
+============================== */
+
+#app{
+    width:100%;
+    min-height:100dvh;
+    position:relative;
+}
+
+/* ==============================
    SCREENS
-========================= */
+============================== */
 
-.screen {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    overflow-y: auto;
+.screen{
+    position:absolute;
+    top:0;
+    left:0;
 
-    opacity: 0;
-    transform: translateX(100%);
-    pointer-events: none;
+    width:100%;
+    min-height:100dvh;
+
+    padding:16px;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    opacity:0;
+    transform:translateX(100%);
+
+    pointer-events:none;
 
     transition:
-        transform 0.45s ease,
-        opacity 0.45s ease;
+        opacity .4s ease,
+        transform .4s ease;
 }
 
-.screen.active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
+.screen.active{
+    opacity:1;
+    transform:translateX(0);
+    pointer-events:auto;
 }
 
-.screen.from-left {
-    transform: translateX(-100%);
-}
-
-.screen.from-right {
-    transform: translateX(100%);
-}
-
-/* =========================
+/* ==============================
    COMMON
-========================= */
+============================== */
 
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: auto;
+.container{
+    width:100%;
+    max-width:850px;
+    margin:0 auto;
 }
 
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+.card{
+    width:100%;
+    background:#fff;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
+h1{
+    font-size:40px;
+    margin-bottom:15px;
 }
 
-h2 {
-    font-size: 30px;
-    margin-bottom: 15px;
+h2{
+    font-size:28px;
+    margin-bottom:15px;
 }
 
-p {
-    line-height: 1.6;
+p{
+    line-height:1.6;
 }
 
-.primary {
-    background: #2563eb;
-    color: white;
-    padding: 14px 24px;
-    border-radius: 12px;
-    margin: 8px;
+button{
+    font-size:16px;
 }
 
-.primary:hover {
-    background: #1d4ed8;
+.primary{
+    background:#16a34a;
+    color:white;
+    padding:13px 22px;
+    border-radius:12px;
+    margin:5px;
 }
 
-.secondary {
-    background: #e5e7eb;
-    color: #111827;
-    padding: 14px 24px;
-    border-radius: 12px;
-    margin: 8px;
+.primary:active{
+    transform:scale(.97);
 }
 
-.danger {
-    background: #dc2626;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
+.blue{
+    background:#2563eb;
+    color:white;
+    padding:13px 22px;
+    border-radius:12px;
+    margin:5px;
 }
 
-/* =========================
+.secondary{
+    background:#e5e7eb;
+    color:#111827;
+    padding:13px 22px;
+    border-radius:12px;
+    margin:5px;
+}
+
+.red{
+    background:#dc2626;
+    color:white;
+    padding:10px 15px;
+    border-radius:10px;
+}
+
+/* ==============================
    TERMS
-========================= */
+============================== */
 
-#terms {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #111827, #2563eb);
+#terms{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #2563eb
+        );
 }
 
-.terms-box {
-    max-width: 700px;
-    background: white;
-    padding: 35px;
-    border-radius: 25px;
+.terms-box{
+    width:100%;
+    max-width:700px;
+    background:white;
+    border-radius:22px;
+    padding:25px;
 }
 
-.terms-box h1 {
-    text-align: center;
+.terms-box h1{
+    text-align:center;
+    color:#2563eb;
 }
 
-.terms-content {
-    max-height: 45vh;
-    overflow-y: auto;
-    padding: 15px;
-    margin: 20px 0;
-    background: #f3f4f6;
-    border-radius: 12px;
+.terms-text{
+    margin:18px 0;
+    padding:18px;
+
+    max-height:45dvh;
+    overflow-y:auto;
+
+    background:#f1f5f9;
+    border-radius:14px;
+
+    line-height:1.6;
 }
 
-.accept-row {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 15px;
+.accept-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:15px;
 }
 
-/* =========================
+.accept-row input{
+    width:18px;
+    height:18px;
+}
+
+/* ==============================
    WELCOME
-========================= */
+============================== */
 
-#welcome {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white;
+#welcome{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
 }
 
-.welcome-box {
-    text-align: center;
+.welcome-box{
+    width:100%;
 }
 
-.welcome-box h1 {
-    font-size: clamp(42px, 9vw, 80px);
+.welcome-box h1{
+    font-size:clamp(38px,10vw,80px);
 }
 
-.welcome-box p {
-    font-size: 20px;
-    margin-bottom: 25px;
+.welcome-box p{
+    font-size:20px;
+    margin-bottom:25px;
 }
 
-/* =========================
-   PRODUCT
-========================= */
+/* ==============================
+   PRODUCTS
+============================== */
 
-.product-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.product-screen{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.product-wrapper {
-    width: 100%;
-    max-width: 650px;
+.product-area{
+    width:100%;
+    max-width:650px;
+    margin:auto;
 }
 
-.product-number {
-    text-align: center;
-    color: #6b7280;
-    margin-bottom: 10px;
+.product-number{
+    text-align:center;
+    color:#6b7280;
+    font-size:18px;
+    margin-bottom:10px;
 }
 
-.product-card {
-    background: white;
-    border-radius: 25px;
-    padding: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    text-align: center;
+.product-card{
+    width:100%;
+    background:white;
+
+    border-radius:24px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.10);
 }
 
-.product-image {
-    width: 100%;
-    max-width: 400px;
-    height: 350px;
-    object-fit: contain;
-    border-radius: 18px;
-    background: #f3f4f6;
-    margin: auto;
-    display: block;
+.product-image{
+    display:block;
+
+    width:100%;
+    max-width:100%;
+
+    height:250px;
+
+    object-fit:contain;
+
+    background:#f1f5f9;
+
+    border-radius:16px;
+
+    margin:auto;
 }
 
-.product-name {
-    font-size: 30px;
-    margin-top: 20px;
+.product-name{
+    font-size:28px;
+    font-weight:bold;
+
+    margin-top:18px;
 }
 
-.product-price {
-    font-size: 26px;
-    font-weight: bold;
-    color: #16a34a;
-    margin: 12px 0;
+.product-price{
+    font-size:26px;
+    font-weight:bold;
+
+    color:#16a34a;
+
+    margin:10px 0;
 }
 
-.product-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 15px;
+.product-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
 }
 
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+.navigation{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:5px;
+
+    margin-top:12px;
 }
 
-.cart-top {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 100;
-    background: #111827;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 30px;
+.navigation button{
+    flex:1;
 }
 
-/* =========================
+.cart-button{
+    position:fixed;
+
+    top:10px;
+    right:10px;
+
+    z-index:50;
+
+    background:#111827;
+    color:white;
+
+    padding:10px 15px;
+
+    border-radius:25px;
+}
+
+/* ==============================
    CART
-========================= */
+============================== */
 
-.cart-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    border-bottom: 1px solid #e5e7eb;
+.cart-row{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid #e5e7eb;
 }
 
-.cart-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    background: #f3f4f6;
-    border-radius: 10px;
+.cart-row img{
+    width:70px;
+    height:70px;
+
+    object-fit:contain;
+
+    background:#f1f5f9;
+
+    border-radius:10px;
+
+    flex-shrink:0;
 }
 
-.cart-info {
-    flex: 1;
+.cart-info{
+    flex:1;
+    min-width:0;
 }
 
-.cart-total {
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 20px;
+.total{
+    font-size:24px;
+    font-weight:bold;
+
+    margin:20px 0;
 }
 
-/* =========================
-   CHECKOUT
-========================= */
+/* ==============================
+   FORMS
+============================== */
 
-.form-group {
-    margin-bottom: 15px;
+.form{
+    margin-bottom:16px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
+.form label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:5px;
 }
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    font-size: 16px;
+.form input,
+.form textarea,
+.form select{
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    background:white;
 }
 
-textarea {
-    min-height: 100px;
+.form textarea{
+    min-height:110px;
+    resize:vertical;
 }
 
-/* =========================
+/* ==============================
    OWNER
-========================= */
+============================== */
 
-.owner-login {
-    max-width: 450px;
-    margin: 100px auto;
+.owner-box{
+    width:100%;
+    max-width:800px;
+    margin:auto;
 }
 
-.owner-panel {
-    max-width: 800px;
-    margin: auto;
+.preview{
+    display:block;
+
+    width:220px;
+    height:220px;
+
+    max-width:100%;
+
+    object-fit:contain;
+
+    background:#f1f5f9;
+
+    border-radius:15px;
+
+    margin:15px 0;
 }
 
-.owner-editor {
-    margin-top: 20px;
+.message{
+    margin-top:12px;
+    font-weight:bold;
 }
 
-.preview-image {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    background: #f3f4f6;
-    border-radius: 15px;
-    display: block;
-    margin: 15px 0;
+/* ==============================
+   SMALL PHONES
+============================== */
+
+@media(max-width:600px){
+
+    .screen{
+        padding:
+            10px
+            10px
+            20px
+            10px;
+    }
+
+    .card{
+        padding:16px;
+        border-radius:18px;
+    }
+
+    .terms-box{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .terms-text{
+        max-height:42dvh;
+        padding:14px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    .product-card{
+        padding:12px;
+        border-radius:20px;
+    }
+
+    .product-image{
+        height:220px;
+    }
+
+    .product-name{
+        font-size:23px;
+        margin-top:14px;
+    }
+
+    .product-price{
+        font-size:23px;
+    }
+
+    .primary,
+    .blue,
+    .secondary{
+        padding:11px 15px;
+        font-size:15px;
+    }
+
+    .navigation button{
+        padding:10px 5px;
+        font-size:13px;
+    }
+
+    .cart-button{
+        top:7px;
+        right:7px;
+        padding:9px 12px;
+        font-size:14px;
+    }
+
+    .cart-row{
+        align-items:flex-start;
+    }
+
+    .cart-row img{
+        width:60px;
+        height:60px;
+    }
+
+    .cart-row .red{
+        padding:8px;
+        font-size:12px;
+    }
 }
 
-.hidden {
-    display: none !important;
-}
+/* ==============================
+   VERY SMALL PHONES
+============================== */
 
-/* =========================
-   MOBILE
-========================= */
+@media(max-width:380px){
 
-@media (max-width: 600px) {
-
-    .screen {
-        padding: 12px;
+    .screen{
+        padding:8px 8px 18px 8px;
     }
 
-    h1 {
-        font-size: 32px;
+    .product-image{
+        height:190px;
     }
 
-    h2 {
-        font-size: 25px;
+    .product-name{
+        font-size:21px;
     }
 
-    .terms-box {
-        padding: 20px;
+    .product-price{
+        font-size:21px;
     }
 
-    .product-card {
-        padding: 15px;
-    }
-
-    .product-image {
-        height: 250px;
-    }
-
-    .product-name {
-        font-size: 24px;
-    }
-
-    .product-price {
-        font-size: 22px;
-    }
-
-    .navigation button {
-        font-size: 14px;
-        padding: 10px 14px;
-    }
-
-    .cart-item {
-        flex-wrap: wrap;
+    .navigation button{
+        font-size:12px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
 <div id="app">
 
-    <!-- =====================
-         TERMS
-    ====================== -->
+<!-- ==================================================
+     TERMS
+================================================== -->
 
-    <section id="terms" class="screen active">
+<section id="terms" class="screen active">
 
-        <div class="terms-box">
+    <div class="terms-box">
 
-            <h1>Hypermart</h1>
+        <h1>Hypermart</h1>
 
-            <h2>Terms & Conditions</h2>
+        <h2>Terms & Conditions</h2>
 
-            <div class="terms-content">
+        <div class="terms-text">
 
-                <p>
-                    Welcome to Hypermart.
-                </p>
+            <p>
+                Welcome to Hypermart.
+            </p>
 
-                <br>
+            <br>
 
-                <p>
-                    By continuing to Hypermart, you agree to use this
-                    website responsibly.
-                </p>
+            <p>
+                By entering Hypermart, you agree to use
+                this website responsibly.
+            </p>
 
-                <br>
+            <br>
 
-                <p>
-                    The Hypermart website design, layout, content,
-                    branding and code are protected. Nobody should
-                    copy or reproduce this website without permission.
-                </p>
+            <p>
+                The Hypermart name, design, layout, code
+                and original website content belong to
+                the website owner.
+            </p>
 
-                <br>
+            <br>
 
-                <p>
-                    Product information and prices may be changed by
-                    the website owner.
-                </p>
+            <p>
+                Nobody should copy or reproduce this
+                website without permission.
+            </p>
 
-                <br>
+            <br>
 
-                <p>
-                    By selecting Accept & Continue, you confirm that
-                    you have read and agreed to these terms.
-                </p>
+            <p>
+                Product names, prices and photographs
+                may be changed by the owner.
+            </p>
 
-            </div>
+            <br>
 
-            <div class="accept-row">
-
-                <input
-                    type="checkbox"
-                    id="acceptTerms"
-                >
-
-                <label for="acceptTerms">
-                    I agree to the Terms & Conditions
-                </label>
-
-            </div>
-
-            <button
-                class="primary"
-                onclick="acceptTerms()"
-            >
-                Accept & Continue
-            </button>
+            <p>
+                Please check your order information
+                before placing an order.
+            </p>
 
         </div>
 
-    </section>
+        <div class="accept-row">
+
+            <input
+                type="checkbox"
+                id="termsCheck"
+            >
+
+            <label for="termsCheck">
+                I agree to the Terms & Conditions
+            </label>
+
+        </div>
+
+        <button
+            class="blue"
+            onclick="acceptTerms()"
+        >
+            Accept & Continue
+        </button>
+
+    </div>
+
+</section>
 
 
-    <!-- =====================
-         WELCOME
-    ====================== -->
+<!-- ==================================================
+     WELCOME
+================================================== -->
 
-    <section id="welcome" class="screen">
+<section id="welcome" class="screen">
 
-        <div class="welcome-box">
+    <div class="welcome-box">
 
-            <h1>Welcome to Hypermart</h1>
+        <h1>Welcome to Hypermart</h1>
 
-            <p>
-                Your shopping experience starts here.
-            </p>
+        <p>
+            Your shopping experience starts here.
+        </p>
+
+        <button
+            class="primary"
+            onclick="openProduct(0)"
+        >
+            Start Shopping
+        </button>
+
+        <button
+            class="secondary"
+            onclick="openProduct(0)"
+        >
+            Skip
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     20 PRODUCT PAGES ARE CREATED BY JAVASCRIPT
+================================================== -->
+
+<div id="products"></div>
+
+
+<!-- ==================================================
+     CART
+================================================== -->
+
+<section id="cart" class="screen">
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>🛒 Cart</h1>
+
+            <div id="cartList"></div>
+
+            <div
+                id="cartTotal"
+                class="total"
+            >
+                Total: ₹0
+            </div>
 
             <button
                 class="primary"
-                onclick="goToProduct(0)"
+                onclick="checkout()"
             >
-                Start Shopping
+                Checkout
             </button>
 
             <button
                 class="secondary"
-                onclick="goToProduct(0)"
+                onclick="openProduct(currentProduct)"
             >
-                Skip
+                Continue Shopping
+            </button>
+
+            <br>
+
+            <button
+                class="blue"
+                onclick="ownerLoginPage()"
+            >
+                Owner
             </button>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- =====================
-         PRODUCTS
-    ====================== -->
+<!-- ==================================================
+     CHECKOUT
+================================================== -->
 
-    <div id="productScreens"></div>
+<section id="checkout" class="screen">
 
+    <div class="container">
 
-    <!-- =====================
-         CART
-    ====================== -->
+        <div class="card">
 
-    <section id="cart" class="screen">
+            <h1>Checkout</h1>
 
-        <div class="container">
+            <div class="form">
 
-            <div class="card">
+                <label>Name</label>
 
-                <h1>🛒 Your Cart</h1>
-
-                <div id="cartItems"></div>
-
-                <div
-                    id="cartTotal"
-                    class="cart-total"
+                <input
+                    id="customerName"
+                    type="text"
+                    placeholder="Enter your name"
                 >
-                    Total: ₹0
-                </div>
-
-                <br>
-
-                <button
-                    class="primary"
-                    onclick="openCheckout()"
-                >
-                    Checkout
-                </button>
-
-                <button
-                    class="secondary"
-                    onclick="goToProduct(currentProduct)"
-                >
-                    Continue Shopping
-                </button>
-
-                <button
-                    class="secondary"
-                    onclick="openOwnerLogin()"
-                >
-                    Owner
-                </button>
 
             </div>
 
-        </div>
+            <div class="form">
 
-    </section>
+                <label>Phone</label>
 
-
-    <!-- =====================
-         CHECKOUT
-    ====================== -->
-
-    <section id="checkout" class="screen">
-
-        <div class="container">
-
-            <div class="card">
-
-                <h1>Checkout</h1>
-
-                <div class="form-group">
-
-                    <label>
-                        Full Name
-                    </label>
-
-                    <input
-                        id="customerName"
-                        type="text"
-                        placeholder="Enter your name"
-                    >
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        Phone Number
-                    </label>
-
-                    <input
-                        id="customerPhone"
-                        type="tel"
-                        placeholder="Enter phone number"
-                    >
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        Delivery Address
-                    </label>
-
-                    <textarea
-                        id="customerAddress"
-                        placeholder="Enter delivery address"
-                    ></textarea>
-
-                </div>
-
-                <button
-                    class="primary"
-                    onclick="placeOrder()"
+                <input
+                    id="customerPhone"
+                    type="tel"
+                    placeholder="Enter phone number"
                 >
-                    Place Order
-                </button>
-
-                <button
-                    class="secondary"
-                    onclick="showScreen('cart')"
-                >
-                    Back to Cart
-                </button>
 
             </div>
 
-        </div>
+            <div class="form">
 
-    </section>
+                <label>Address</label>
 
-
-    <!-- =====================
-         ORDER SUCCESS
-    ====================== -->
-
-    <section id="orderSuccess" class="screen">
-
-        <div class="container">
-
-            <div class="card" style="text-align:center">
-
-                <h1>🎉 Order Placed!</h1>
-
-                <p>
-                    Thank you for shopping with Hypermart.
-                </p>
-
-                <br>
-
-                <button
-                    class="primary"
-                    onclick="goToProduct(0)"
-                >
-                    Continue Shopping
-                </button>
+                <textarea
+                    id="customerAddress"
+                    placeholder="Enter delivery address"
+                ></textarea>
 
             </div>
 
+            <button
+                class="primary"
+                onclick="placeOrder()"
+            >
+                Place Order
+            </button>
+
+            <button
+                class="secondary"
+                onclick="showScreen('cart')"
+            >
+                Back
+            </button>
+
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- =====================
-         OWNER LOGIN
-    ====================== -->
+<!-- ==================================================
+     SUCCESS
+================================================== -->
 
-    <section id="ownerLogin" class="screen">
+<section id="success" class="screen">
 
-        <div class="owner-login">
+    <div class="container">
 
-            <div class="card">
+        <div
+            class="card"
+            style="text-align:center"
+        >
 
-                <h2>Owner Login</h2>
+            <h1>🎉 Order Placed!</h1>
 
-                <div class="form-group">
+            <p>
+                Thank you for shopping with Hypermart.
+            </p>
 
-                    <label>
-                        Owner Password
-                    </label>
+            <br>
 
-                    <input
-                        id="ownerPassword"
-                        type="password"
-                        placeholder="Enter password"
-                    >
+            <button
+                class="primary"
+                onclick="openProduct(0)"
+            >
+                Continue Shopping
+            </button>
 
-                </div>
+        </div>
 
-                <button
-                    class="primary"
-                    onclick="ownerLogin()"
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     OWNER LOGIN
+================================================== -->
+
+<section id="ownerLogin" class="screen">
+
+    <div class="container">
+
+        <div
+            class="card"
+            style="max-width:450px;margin:80px auto"
+        >
+
+            <h2>Owner Login</h2>
+
+            <div class="form">
+
+                <label>Password</label>
+
+                <input
+                    id="ownerPassword"
+                    type="password"
+                    placeholder="Enter owner password"
                 >
-                    Login
-                </button>
-
-                <button
-                    class="secondary"
-                    onclick="showScreen('cart')"
-                >
-                    Back
-                </button>
-
-                <p
-                    id="loginError"
-                    style="color:red;margin-top:10px"
-                ></p>
 
             </div>
 
+            <button
+                class="blue"
+                onclick="loginOwner()"
+            >
+                Login
+            </button>
+
+            <button
+                class="secondary"
+                onclick="showScreen('cart')"
+            >
+                Back
+            </button>
+
+            <p
+                id="loginError"
+                style="color:red;margin-top:12px"
+            ></p>
+
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- =====================
-         OWNER PANEL
-    ====================== -->
+<!-- ==================================================
+     OWNER PANEL
+================================================== -->
 
-    <section id="ownerPanel" class="screen">
+<section id="ownerPanel" class="screen">
 
-        <div class="owner-panel">
+    <div class="owner-box">
 
-            <div class="card">
+        <div class="card">
 
-                <h1>Owner Panel</h1>
+            <h1>Owner Panel</h1>
 
-                <p>
-                    Edit your 20 products here.
-                </p>
+            <p>
+                Change the name, price and photo of
+                any product.
+            </p>
 
-                <br>
+            <br>
 
-                <div class="form-group">
+            <div class="form">
 
-                    <label>
-                        Select Product
-                    </label>
+                <label>
+                    Select Product
+                </label>
 
-                    <select
-                        id="ownerProductSelect"
-                        onchange="loadOwnerProduct()"
-                        style="
-                        width:100%;
-                        padding:13px;
-                        border-radius:10px;
-                        border:1px solid #ccc;
-                        "
-                    ></select>
-
-                </div>
-
-                <div class="owner-editor">
-
-                    <div class="form-group">
-
-                        <label>
-                            Product Name
-                        </label>
-
-                        <input
-                            id="ownerProductName"
-                            type="text"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>
-                            Product Price
-                        </label>
-
-                        <input
-                            id="ownerProductPrice"
-                            type="number"
-                            min="0"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>
-                            Product Photo
-                        </label>
-
-                        <input
-                            id="ownerProductImage"
-                            type="file"
-                            accept="image/*"
-                            onchange="previewOwnerImage(event)"
-                        >
-
-                    </div>
-
-                    <img
-                        id="ownerPreview"
-                        class="preview-image"
-                        alt="Product Preview"
-                    >
-
-                    <button
-                        class="primary"
-                        onclick="saveOwnerProduct()"
-                    >
-                        Save Product
-                    </button>
-
-                    <button
-                        class="secondary"
-                        onclick="showScreen('cart')"
-                    >
-                        Exit Owner Panel
-                    </button>
-
-                    <p
-                        id="saveMessage"
-                        style="color:green;margin-top:15px"
-                    ></p>
-
-                </div>
+                <select
+                    id="ownerSelect"
+                    onchange="loadOwnerProduct()"
+                ></select>
 
             </div>
 
+            <div class="form">
+
+                <label>
+                    Product Name
+                </label>
+
+                <input
+                    id="ownerName"
+                    type="text"
+                >
+
+            </div>
+
+            <div class="form">
+
+                <label>
+                    Product Price
+                </label>
+
+                <input
+                    id="ownerPrice"
+                    type="number"
+                    min="0"
+                >
+
+            </div>
+
+            <div class="form">
+
+                <label>
+                    Product Photo
+                </label>
+
+                <input
+                    id="ownerImage"
+                    type="file"
+                    accept="image/*"
+                    onchange="previewImage(event)"
+                >
+
+            </div>
+
+            <img
+                id="ownerPreview"
+                class="preview"
+                alt="Product preview"
+            >
+
+            <button
+                class="primary"
+                onclick="saveOwnerProduct()"
+            >
+                Save Product
+            </button>
+
+            <button
+                class="secondary"
+                onclick="showScreen('cart')"
+            >
+                Exit Owner
+            </button>
+
+            <p
+                id="saveMessage"
+                class="message"
+            ></p>
+
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   HYPERMART JAVASCRIPT
-===================================================== */
+/* ==================================================
+   HYPERMART DATA
+================================================== */
+
+const STORAGE_KEY =
+    "hypermart_products_v3";
+
+const CART_KEY =
+    "hypermart_cart_v3";
+
+const TERMS_KEY =
+    "hypermart_terms_v3";
+
+const OWNER_PASSWORD =
+    "1234";
 
 
-/* =========================
-   OWNER PASSWORD
-========================= */
+/* ==================================================
+   DEFAULT 20 PRODUCTS
+================================================== */
 
-const OWNER_PASSWORD = "1234";
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-const defaultProducts = [
+const DEFAULT_PRODUCTS = [
 
     {
-        name: "Smartphone",
-        price: 14999,
-        image: ""
+        name:"Smartphone",
+        price:14999,
+        image:""
     },
 
     {
-        name: "Laptop",
-        price: 49999,
-        image: ""
+        name:"Laptop",
+        price:49999,
+        image:""
     },
 
     {
-        name: "Wireless Headphones",
-        price: 1999,
-        image: ""
+        name:"Wireless Headphones",
+        price:1999,
+        image:""
     },
 
     {
-        name: "Smart Watch",
-        price: 2999,
-        image: ""
+        name:"Smart Watch",
+        price:2999,
+        image:""
     },
 
     {
-        name: "Bluetooth Speaker",
-        price: 2499,
-        image: ""
+        name:"Bluetooth Speaker",
+        price:2499,
+        image:""
     },
 
     {
-        name: "Running Shoes",
-        price: 2499,
-        image: ""
+        name:"Running Shoes",
+        price:2499,
+        image:""
     },
 
     {
-        name: "Backpack",
-        price: 1499,
-        image: ""
+        name:"Backpack",
+        price:1499,
+        image:""
     },
 
     {
-        name: "Sunglasses",
-        price: 999,
-        image: ""
+        name:"Sunglasses",
+        price:999,
+        image:""
     },
 
     {
-        name: "T-Shirt",
-        price: 799,
-        image: ""
+        name:"T-Shirt",
+        price:799,
+        image:""
     },
 
     {
-        name: "Jeans",
-        price: 1499,
-        image: ""
+        name:"Jeans",
+        price:1499,
+        image:""
     },
 
     {
-        name: "Gaming Mouse",
-        price: 1299,
-        image: ""
+        name:"Gaming Mouse",
+        price:1299,
+        image:""
     },
 
     {
-        name: "Mechanical Keyboard",
-        price: 2999,
-        image: ""
+        name:"Mechanical Keyboard",
+        price:2999,
+        image:""
     },
 
     {
-        name: "Power Bank",
-        price: 1499,
-        image: ""
+        name:"Power Bank",
+        price:1499,
+        image:""
     },
 
     {
-        name: "Camera",
-        price: 34999,
-        image: ""
+        name:"Camera",
+        price:34999,
+        image:""
     },
 
     {
-        name: "Tablet",
-        price: 18999,
-        image: ""
+        name:"Tablet",
+        price:18999,
+        image:""
     },
 
     {
-        name: "Fitness Band",
-        price: 1999,
-        image: ""
+        name:"Fitness Band",
+        price:1999,
+        image:""
     },
 
     {
-        name: "Water Bottle",
-        price: 599,
-        image: ""
+        name:"Water Bottle",
+        price:599,
+        image:""
     },
 
     {
-        name: "Travel Bag",
-        price: 1999,
-        image: ""
+        name:"Travel Bag",
+        price:1999,
+        image:""
     },
 
     {
-        name: "Desk Lamp",
-        price: 899,
-        image: ""
+        name:"Desk Lamp",
+        price:899,
+        image:""
     },
 
     {
-        name: "Gaming Controller",
-        price: 2499,
-        image: ""
+        name:"Gaming Controller",
+        price:2499,
+        image:""
     }
 
 ];
 
 
-/* =========================
+/* ==================================================
    LOAD PRODUCTS
-========================= */
+================================================== */
+
+function loadProducts(){
+
+    const saved =
+        localStorage.getItem(STORAGE_KEY);
+
+    if(!saved){
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(DEFAULT_PRODUCTS)
+        );
+
+        return JSON.parse(
+            JSON.stringify(DEFAULT_PRODUCTS)
+        );
+    }
+
+    try{
+
+        const data =
+            JSON.parse(saved);
+
+        if(
+            !Array.isArray(data) ||
+            data.length !== 20
+        ){
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(DEFAULT_PRODUCTS)
+            );
+
+            return JSON.parse(
+                JSON.stringify(DEFAULT_PRODUCTS)
+            );
+        }
+
+        return data;
+
+    }catch(error){
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(DEFAULT_PRODUCTS)
+        );
+
+        return JSON.parse(
+            JSON.stringify(DEFAULT_PRODUCTS)
+        );
+
+    }
+}
+
 
 let products =
-    JSON.parse(
-        localStorage.getItem("hypermartProducts")
-    ) || defaultProducts;
+    loadProducts();
 
 
-/* =========================
+/* ==================================================
    CART
-========================= */
+================================================== */
+
+function loadCart(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(CART_KEY);
+
+        return saved
+            ? JSON.parse(saved)
+            : [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
 
 let cart =
-    JSON.parse(
-        localStorage.getItem("hypermartCart")
-    ) || [];
+    loadCart();
 
 
-/* =========================
+/* ==================================================
    CURRENT PRODUCT
-========================= */
+================================================== */
 
 let currentProduct = 0;
 
 
-/* =========================
-   CURRENT OWNER PRODUCT
-========================= */
+/* ==================================================
+   OWNER PRODUCT
+================================================== */
 
-let ownerProductIndex = 0;
-
-
-/* =========================
-   TEMP IMAGE
-========================= */
-
-let temporaryImage = null;
+let selectedOwnerProduct = 0;
 
 
-/* =====================================================
-   CREATE 20 PRODUCT SCREENS
-===================================================== */
+/* ==================================================
+   TEMPORARY IMAGE
+================================================== */
 
-function createProductScreens() {
-
-    const container =
-        document.getElementById("productScreens");
-
-    container.innerHTML = "";
-
-    products.forEach((product, index) => {
-
-        const section =
-            document.createElement("section");
-
-        section.className =
-            "screen product-screen";
-
-        section.id =
-            "product-" + index;
-
-        section.innerHTML = `
-
-            <button
-                class="cart-top"
-                onclick="openCart()"
-            >
-                🛒 Cart
-                <span id="cartCount-${index}">
-                    0
-                </span>
-            </button>
-
-            <div class="product-wrapper">
-
-                <div class="product-number">
-                    Product ${index + 1} of 20
-                </div>
-
-                <div class="product-card">
-
-                    <img
-                        id="productImage-${index}"
-                        class="product-image"
-                        src="${product.image || createPlaceholder(product.name)}"
-                        alt="${product.name}"
-                    >
-
-                    <div
-                        id="productName-${index}"
-                        class="product-name"
-                    >
-                        ${product.name}
-                    </div>
-
-                    <div
-                        id="productPrice-${index}"
-                        class="product-price"
-                    >
-                        ₹${Number(product.price).toLocaleString("en-IN")}
-                    </div>
-
-                    <div class="product-actions">
-
-                        <button
-                            class="primary"
-                            onclick="addToCart(${index})"
-                        >
-                            🛒 Add to Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div class="navigation">
-
-                    <button
-                        class="secondary"
-                        onclick="previousProduct()"
-                    >
-                        ← Previous
-                    </button>
-
-                    <button
-                        class="secondary"
-                        onclick="showScreen('welcome')"
-                    >
-                        Home
-                    </button>
-
-                    <button
-                        class="secondary"
-                        onclick="nextProduct()"
-                    >
-                        Next →
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-        container.appendChild(section);
-
-    });
-
-    updateCartCount();
-
-}
+let temporaryImage = "";
 
 
-/* =====================================================
-   PLACEHOLDER
-===================================================== */
-
-function createPlaceholder(name) {
-
-    return "data:image/svg+xml;charset=UTF-8," +
-        encodeURIComponent(`
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="500"
-                height="400"
-            >
-                <rect
-                    width="100%"
-                    height="100%"
-                    fill="#e5e7eb"
-                />
-
-                <text
-                    x="50%"
-                    y="50%"
-                    text-anchor="middle"
-                    dominant-baseline="middle"
-                    font-size="28"
-                    fill="#6b7280"
-                >
-                    ${name}
-                </text>
-            </svg>
-        `);
-
-}
-
-
-/* =====================================================
+/* ==================================================
    SHOW SCREEN
-===================================================== */
+================================================== */
 
-function showScreen(screenId) {
+function showScreen(id){
 
-    const screens =
-        document.querySelectorAll(".screen");
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
 
-    screens.forEach(screen => {
+            screen.classList.remove("active");
 
-        screen.classList.remove("active");
-
-    });
+        });
 
     const target =
-        document.getElementById(screenId);
+        document.getElementById(id);
 
-    if (!target) return;
+    if(target){
 
-    target.classList.add("active");
+        target.classList.add("active");
+
+    }
 
 }
 
 
-/* =====================================================
+/* ==================================================
    ACCEPT TERMS
-===================================================== */
+================================================== */
 
-function acceptTerms() {
+function acceptTerms(){
 
     const checkbox =
-        document.getElementById("acceptTerms");
+        document.getElementById("termsCheck");
 
-    if (!checkbox.checked) {
+    if(!checkbox.checked){
 
         alert(
-            "Please agree to the Terms & Conditions first."
+            "Please agree to the Terms & Conditions."
         );
 
         return;
+
     }
 
     localStorage.setItem(
-        "hypermartTermsAccepted",
+        TERMS_KEY,
         "yes"
     );
 
@@ -1234,24 +1334,182 @@ function acceptTerms() {
 }
 
 
-/* =====================================================
-   PRODUCT NAVIGATION
-===================================================== */
+/* ==================================================
+   PLACEHOLDER
+================================================== */
 
-function goToProduct(index) {
+function makePlaceholder(name){
 
-    if (index < 0) {
+    return "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(`
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="600"
+            height="400"
+        >
+
+            <rect
+                width="100%"
+                height="100%"
+                fill="#e5e7eb"
+            />
+
+            <text
+                x="50%"
+                y="50%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Arial"
+                font-size="30"
+                fill="#64748b"
+            >
+                ${name}
+            </text>
+
+        </svg>
+        `);
+
+}
+
+
+/* ==================================================
+   CREATE 20 PRODUCT PAGES
+================================================== */
+
+function createProductPages(){
+
+    const container =
+        document.getElementById("products");
+
+    container.innerHTML = "";
+
+    products.forEach(
+        (product,index) => {
+
+            const section =
+                document.createElement("section");
+
+            section.id =
+                "productPage" + index;
+
+            section.className =
+                "screen product-screen";
+
+            const image =
+                product.image ||
+                makePlaceholder(product.name);
+
+            section.innerHTML = `
+
+                <button
+                    class="cart-button"
+                    onclick="openCart()"
+                >
+                    🛒 Cart
+                    <span id="cartCount${index}">
+                        ${cart.length}
+                    </span>
+                </button>
+
+                <div class="product-area">
+
+                    <div class="product-number">
+                        Product ${index + 1} of 20
+                    </div>
+
+                    <div class="product-card">
+
+                        <img
+                            id="productImage${index}"
+                            class="product-image"
+                            src="${image}"
+                            alt="${product.name}"
+                        >
+
+                        <div
+                            id="productName${index}"
+                            class="product-name"
+                        >
+                            ${product.name}
+                        </div>
+
+                        <div
+                            id="productPrice${index}"
+                            class="product-price"
+                        >
+                            ₹${Number(product.price)
+                                .toLocaleString("en-IN")}
+                        </div>
+
+                        <div class="product-buttons">
+
+                            <button
+                                class="primary"
+                                onclick="addToCart(${index})"
+                            >
+                                🛒 Add to Cart
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="navigation">
+
+                        <button
+                            class="secondary"
+                            onclick="previousProduct()"
+                        >
+                            ← Previous
+                        </button>
+
+                        <button
+                            class="secondary"
+                            onclick="showScreen('welcome')"
+                        >
+                            Home
+                        </button>
+
+                        <button
+                            class="secondary"
+                            onclick="nextProduct()"
+                        >
+                            Next →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            container.appendChild(section);
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   OPEN PRODUCT
+================================================== */
+
+function openProduct(index){
+
+    if(index < 0){
         index = 0;
     }
 
-    if (index >= products.length) {
-        index = products.length - 1;
+    if(index > 19){
+        index = 19;
     }
 
-    currentProduct = index;
+    currentProduct =
+        index;
 
     showScreen(
-        "product-" + index
+        "productPage" + index
     );
 
     updateCartCount();
@@ -1259,17 +1517,21 @@ function goToProduct(index) {
 }
 
 
-function nextProduct() {
+/* ==================================================
+   NEXT PRODUCT
+================================================== */
 
-    if (currentProduct < products.length - 1) {
+function nextProduct(){
+
+    if(currentProduct < 19){
 
         currentProduct++;
 
-        showScreen(
-            "product-" + currentProduct
+        openProduct(
+            currentProduct
         );
 
-    } else {
+    }else{
 
         openCart();
 
@@ -1278,17 +1540,21 @@ function nextProduct() {
 }
 
 
-function previousProduct() {
+/* ==================================================
+   PREVIOUS PRODUCT
+================================================== */
 
-    if (currentProduct > 0) {
+function previousProduct(){
+
+    if(currentProduct > 0){
 
         currentProduct--;
 
-        showScreen(
-            "product-" + currentProduct
+        openProduct(
+            currentProduct
         );
 
-    } else {
+    }else{
 
         showScreen("welcome");
 
@@ -1297,33 +1563,50 @@ function previousProduct() {
 }
 
 
-/* =====================================================
-   CART
-===================================================== */
+/* ==================================================
+   ADD TO CART
+================================================== */
 
-function addToCart(index) {
+function addToCart(index){
 
     cart.push(index);
 
-    localStorage.setItem(
-        "hypermartCart",
-        JSON.stringify(cart)
-    );
+    saveCart();
 
     updateCartCount();
 
     alert(
         products[index].name +
-        " added to cart!"
+        " added to cart."
     );
 
 }
 
 
-function updateCartCount() {
+/* ==================================================
+   SAVE CART
+================================================== */
+
+function saveCart(){
+
+    localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* ==================================================
+   UPDATE CART COUNT
+================================================== */
+
+function updateCartCount(){
 
     document
-        .querySelectorAll("[id^='cartCount-']")
+        .querySelectorAll(
+            "[id^='cartCount']"
+        )
         .forEach(element => {
 
             element.textContent =
@@ -1334,7 +1617,11 @@ function updateCartCount() {
 }
 
 
-function openCart() {
+/* ==================================================
+   OPEN CART
+================================================== */
+
+function openCart(){
 
     renderCart();
 
@@ -1343,14 +1630,20 @@ function openCart() {
 }
 
 
-function renderCart() {
+/* ==================================================
+   RENDER CART
+================================================== */
 
-    const container =
-        document.getElementById("cartItems");
+function renderCart(){
 
-    if (cart.length === 0) {
+    const list =
+        document.getElementById(
+            "cartList"
+        );
 
-        container.innerHTML =
+    if(cart.length === 0){
+
+        list.innerHTML =
             "<p>Your cart is empty.</p>";
 
         document.getElementById(
@@ -1359,63 +1652,64 @@ function renderCart() {
             "Total: ₹0";
 
         return;
+
     }
+
+    list.innerHTML = "";
 
     let total = 0;
 
-    container.innerHTML = "";
+    cart.forEach(
+        (productIndex,cartIndex) => {
 
-    cart.forEach((productIndex, cartIndex) => {
+            const product =
+                products[productIndex];
 
-        const product =
-            products[productIndex];
+            total +=
+                Number(product.price);
 
-        total +=
-            Number(product.price);
+            const row =
+                document.createElement("div");
 
-        const item =
-            document.createElement("div");
+            row.className =
+                "cart-row";
 
-        item.className =
-            "cart-item";
+            row.innerHTML = `
 
-        item.innerHTML = `
+                <img
+                    src="${
+                        product.image ||
+                        makePlaceholder(product.name)
+                    }"
+                    alt="${product.name}"
+                >
 
-            <img
-                src="${
-                    product.image ||
-                    createPlaceholder(product.name)
-                }"
-                alt="${product.name}"
-            >
+                <div class="cart-info">
 
-            <div class="cart-info">
+                    <strong>
+                        ${product.name}
+                    </strong>
 
-                <strong>
-                    ${product.name}
-                </strong>
+                    <br>
 
-                <br>
-
-                <span>
                     ₹${Number(product.price)
                         .toLocaleString("en-IN")}
-                </span>
 
-            </div>
+                </div>
 
-            <button
-                class="danger"
-                onclick="removeFromCart(${cartIndex})"
-            >
-                Remove
-            </button>
+                <button
+                    class="red"
+                    onclick="removeFromCart(${cartIndex})"
+                >
+                    Remove
+                </button>
 
-        `;
+            `;
 
-        container.appendChild(item);
+            list.appendChild(row);
 
-    });
+        }
+    );
 
     document.getElementById(
         "cartTotal"
@@ -1426,14 +1720,15 @@ function renderCart() {
 }
 
 
-function removeFromCart(index) {
+/* ==================================================
+   REMOVE CART ITEM
+================================================== */
 
-    cart.splice(index, 1);
+function removeFromCart(index){
 
-    localStorage.setItem(
-        "hypermartCart",
-        JSON.stringify(cart)
-    );
+    cart.splice(index,1);
+
+    saveCart();
 
     renderCart();
 
@@ -1442,19 +1737,20 @@ function removeFromCart(index) {
 }
 
 
-/* =====================================================
+/* ==================================================
    CHECKOUT
-===================================================== */
+================================================== */
 
-function openCheckout() {
+function checkout(){
 
-    if (cart.length === 0) {
+    if(cart.length === 0){
 
         alert(
             "Your cart is empty."
         );
 
         return;
+
     }
 
     showScreen("checkout");
@@ -1462,38 +1758,50 @@ function openCheckout() {
 }
 
 
-function placeOrder() {
+/* ==================================================
+   PLACE ORDER
+================================================== */
+
+function placeOrder(){
 
     const name =
-        document.getElementById(
-            "customerName"
-        ).value.trim();
+        document
+            .getElementById(
+                "customerName"
+            )
+            .value.trim();
 
     const phone =
-        document.getElementById(
-            "customerPhone"
-        ).value.trim();
+        document
+            .getElementById(
+                "customerPhone"
+            )
+            .value.trim();
 
     const address =
-        document.getElementById(
-            "customerAddress"
-        ).value.trim();
+        document
+            .getElementById(
+                "customerAddress"
+            )
+            .value.trim();
 
-    if (!name || !phone || !address) {
+    if(
+        !name ||
+        !phone ||
+        !address
+    ){
 
         alert(
-            "Please fill in all checkout details."
+            "Please fill in all the details."
         );
 
         return;
+
     }
 
     cart = [];
 
-    localStorage.setItem(
-        "hypermartCart",
-        JSON.stringify(cart)
-    );
+    saveCart();
 
     updateCartCount();
 
@@ -1509,16 +1817,16 @@ function placeOrder() {
         "customerAddress"
     ).value = "";
 
-    showScreen("orderSuccess");
+    showScreen("success");
 
 }
 
 
-/* =====================================================
-   OWNER LOGIN
-===================================================== */
+/* ==================================================
+   OWNER LOGIN PAGE
+================================================== */
 
-function openOwnerLogin() {
+function ownerLoginPage(){
 
     document.getElementById(
         "ownerPassword"
@@ -1528,242 +1836,290 @@ function openOwnerLogin() {
         "loginError"
     ).textContent = "";
 
-    showScreen("ownerLogin");
+    showScreen(
+        "ownerLogin"
+    );
 
 }
 
 
-function ownerLogin() {
+/* ==================================================
+   OWNER LOGIN
+================================================== */
+
+function loginOwner(){
 
     const password =
         document.getElementById(
             "ownerPassword"
         ).value;
 
-    if (password === OWNER_PASSWORD) {
+    if(
+        password === OWNER_PASSWORD
+    ){
 
-        createOwnerProductList();
+        createOwnerList();
+
+        selectedOwnerProduct = 0;
+
+        document.getElementById(
+            "ownerSelect"
+        ).value = "0";
 
         loadOwnerProduct();
 
-        showScreen("ownerPanel");
+        showScreen(
+            "ownerPanel"
+        );
 
-    } else {
+    }else{
 
         document.getElementById(
             "loginError"
         ).textContent =
-            "Incorrect owner password.";
+            "Incorrect password.";
 
     }
 
 }
 
 
-/* =====================================================
+/* ==================================================
    OWNER PRODUCT LIST
-===================================================== */
+================================================== */
 
-function createOwnerProductList() {
+function createOwnerList(){
 
     const select =
         document.getElementById(
-            "ownerProductSelect"
+            "ownerSelect"
         );
 
     select.innerHTML = "";
 
-    products.forEach((product, index) => {
+    products.forEach(
+        (product,index) => {
 
-        const option =
-            document.createElement("option");
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value = index;
+            option.value =
+                index;
 
-        option.textContent =
-            "Product " +
-            (index + 1) +
-            " - " +
-            product.name;
+            option.textContent =
+                "Product " +
+                (index + 1) +
+                " - " +
+                product.name;
 
-        select.appendChild(option);
+            select.appendChild(
+                option
+            );
 
-    });
-
-    select.value =
-        ownerProductIndex;
+        }
+    );
 
 }
 
 
-/* =====================================================
+/* ==================================================
    LOAD OWNER PRODUCT
-===================================================== */
+================================================== */
 
-function loadOwnerProduct() {
+function loadOwnerProduct(){
 
-    ownerProductIndex =
+    selectedOwnerProduct =
         Number(
             document.getElementById(
-                "ownerProductSelect"
+                "ownerSelect"
             ).value
         );
 
     const product =
-        products[ownerProductIndex];
+        products[
+            selectedOwnerProduct
+        ];
 
     document.getElementById(
-        "ownerProductName"
+        "ownerName"
     ).value =
         product.name;
 
     document.getElementById(
-        "ownerProductPrice"
+        "ownerPrice"
     ).value =
         product.price;
+
+    temporaryImage =
+        product.image || "";
 
     document.getElementById(
         "ownerPreview"
     ).src =
         product.image ||
-        createPlaceholder(product.name);
-
-    temporaryImage =
-        product.image || null;
+        makePlaceholder(
+            product.name
+        );
 
 }
 
 
-/* =====================================================
-   PREVIEW OWNER IMAGE
-===================================================== */
+/* ==================================================
+   IMAGE PREVIEW
+================================================== */
 
-function previewOwnerImage(event) {
+function previewImage(event){
 
     const file =
         event.target.files[0];
 
-    if (!file) return;
+    if(!file){
+        return;
+    }
+
+    if(!file.type.startsWith("image/")){
+
+        alert(
+            "Please select an image file."
+        );
+
+        return;
+
+    }
 
     const reader =
         new FileReader();
 
-    reader.onload = function(e) {
+    reader.onload =
+        function(){
 
-        temporaryImage =
-            e.target.result;
+            temporaryImage =
+                reader.result;
 
-        document.getElementById(
-            "ownerPreview"
-        ).src =
-            temporaryImage;
+            document.getElementById(
+                "ownerPreview"
+            ).src =
+                temporaryImage;
 
-    };
+        };
 
     reader.readAsDataURL(file);
 
 }
 
 
-/* =====================================================
+/* ==================================================
    SAVE OWNER PRODUCT
-===================================================== */
+================================================== */
 
-function saveOwnerProduct() {
+function saveOwnerProduct(){
 
     const name =
         document.getElementById(
-            "ownerProductName"
+            "ownerName"
         ).value.trim();
 
     const price =
         Number(
             document.getElementById(
-                "ownerProductPrice"
+                "ownerPrice"
             ).value
         );
 
-    if (!name) {
+    if(!name){
 
         alert(
-            "Enter a product name."
+            "Please enter a product name."
         );
 
         return;
+
     }
 
-    if (price < 0 || isNaN(price)) {
+    if(
+        Number.isNaN(price) ||
+        price < 0
+    ){
 
         alert(
-            "Enter a valid price."
+            "Please enter a valid price."
         );
 
         return;
+
     }
 
-    products[ownerProductIndex] = {
+    products[
+        selectedOwnerProduct
+    ] = {
 
-        name: name,
+        name:name,
 
-        price: price,
+        price:price,
 
-        image: temporaryImage || ""
+        image:temporaryImage
 
     };
 
     localStorage.setItem(
-        "hypermartProducts",
+        STORAGE_KEY,
         JSON.stringify(products)
     );
+
+    createProductPages();
+
+    createOwnerList();
+
+    document.getElementById(
+        "ownerSelect"
+    ).value =
+        selectedOwnerProduct;
+
+    loadOwnerProduct();
 
     document.getElementById(
         "saveMessage"
     ).textContent =
-        "Product saved successfully.";
-
-    createProductScreens();
-
-    createOwnerProductList();
-
-    document.getElementById(
-        "ownerProductSelect"
-    ).value =
-        ownerProductIndex;
-
-    loadOwnerProduct();
+        "✓ Product saved successfully.";
 
 }
 
 
-/* =====================================================
+/* ==================================================
    START HYPERMART
-===================================================== */
+================================================== */
 
-function startHypermart() {
+function startHypermart(){
 
-    createProductScreens();
+    createProductPages();
 
     const accepted =
         localStorage.getItem(
-            "hypermartTermsAccepted"
+            TERMS_KEY
         );
 
-    if (accepted === "yes") {
+    if(accepted === "yes"){
 
-        showScreen("welcome");
+        showScreen(
+            "welcome"
+        );
 
-    } else {
+    }else{
 
-        showScreen("terms");
+        showScreen(
+            "terms"
+        );
 
     }
 
 }
 
 
-/* =====================================================
+/* ==================================================
    START
-===================================================== */
+================================================== */
 
 startHypermart();
 
